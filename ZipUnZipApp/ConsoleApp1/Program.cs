@@ -13,8 +13,8 @@ namespace ConsoleApp1
     {
         public static void Main(string[] args)
         {
-            while (true)
-            {
+           start:
+            
                 try
                 {
                     Console.WriteLine("Please choose: \n 1.Compress \n 2.Extract \n (Enter 1 or 2)");
@@ -24,12 +24,12 @@ namespace ConsoleApp1
               
                     if (inputChoice == 1)
                     {
-                        while (true)
-                        {
-                            Console.WriteLine("Please specify type of compression, source (with double backslash or @) and target paths in the format of: type source target.");
+                        choice1:
+                        
+                            Console.WriteLine("Please specify type of compression, source (with double backslash) and target paths in the format of: type source target.");
 
                             var inputSecond = Console.ReadLine();
-                            if (string.IsNullOrEmpty(inputSecond)) continue;
+                            if (string.IsNullOrEmpty(inputSecond)) goto choice1;
                             var keyWords = inputSecond.Split(' ');
                             var compressionType = keyWords[0].ToLower();
                             var source = keyWords[1];
@@ -50,27 +50,28 @@ namespace ConsoleApp1
                                         break;
                                 }
 
-                                break;
+                                
                             }
                             else
                             {
                                 Console.WriteLine("Source invalid, try again");
+                                goto choice1;
                             }
                             
 
-                        }
+                        
 
-                        break;
+                        
 
                     }
                     else if (inputChoice == 2)
                     {
-                        while (true)
-                        {
-                            Console.WriteLine("Please specify type of Extraction, source (with double backslash or @) and target paths in the format of: type source target.");
+                        choice2:
+                        
+                            Console.WriteLine("Please specify type of Extraction, source (with double backslash) and target paths in the format of: type source target.");
 
                             var inputSecond = Console.ReadLine();
-                            if (string.IsNullOrEmpty(inputSecond)) continue;
+                            if (string.IsNullOrEmpty(inputSecond)) goto choice2;
                             var keyWords = inputSecond.Split(' ');
                             var compressionType = keyWords[0].ToLower();
                             var source = keyWords[1];
@@ -91,29 +92,32 @@ namespace ConsoleApp1
                                         break;
                                 }
 
-                                break;
+                                
                             }
                             else
                             {
                                 Console.WriteLine("Source invalid, try again");
+                                goto choice2;
                             }
                         
                         
-                        }
-                        break;
+                        
+                        
                     }
                     else
                     {
                         Console.WriteLine("Try Again, incorrect input");
+                        goto start;
                     }
                 }
                 catch(Exception e)
                 {
                     Console.WriteLine("Something went WRONG: " + e.ToString());
+                    goto start;
                 }
 
                
-            }
+            
 
         }
 
